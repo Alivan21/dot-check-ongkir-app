@@ -32,7 +32,7 @@
         "plugin:jsx-a11y/recommended"
       ],
       "rules": {
-        "react/jsx-no-leaked-render": ["error", { "validStrategies": ["ternary"] }],
+        "react/jsx-no-leaked-render": ["error", { "validStrategies": ["coerce"] }],
         "react/jsx-max-depth": ["error", { "max": 8 }],
         "react/jsx-no-useless-fragment": "warn",
         "react/jsx-curly-brace-presence": "warn",

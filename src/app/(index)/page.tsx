@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function IndexPage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="mx-auto flex min-h-screen w-full flex-col">
       <header className="flex h-14 items-center px-4 py-5 lg:px-6">
         <Link className="flex items-center justify-center" href="#">
           <Truck className="mr-2 size-6" />
@@ -34,7 +34,7 @@ export default function IndexPage() {
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-8">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
@@ -66,7 +66,7 @@ export default function IndexPage() {
           className="w-full bg-gray-100 py-12 dark:bg-gray-800 md:py-24 lg:py-32"
           id="features"
         >
-          <div className="container px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6">
             <h2 className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Key Features
             </h2>
