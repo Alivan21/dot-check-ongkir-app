@@ -1,3 +1,57 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "root": true,
+  "ignorePatterns": ["node_modules/*", ".next/*", ".out/*", "!.prettierrc", "!.eslintrc"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:tailwindcss/recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "overrides": [
+    // React
+    {
+      "files": ["**/*.{jsx,tsx}"],
+      "extends": [
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:jsx-a11y/recommended"
+      ],
+      "rules": {
+        "react/jsx-no-leaked-render": ["error", { "validStrategies": ["ternary"] }],
+        "react/jsx-max-depth": ["error", { "max": 8 }],
+        "react/jsx-no-useless-fragment": "warn",
+        "react/jsx-curly-brace-presence": "warn",
+        "react/no-typos": "warn",
+        "react/display-name": "warn",
+        "react/self-closing-comp": "warn",
+        "react/jsx-sort-props": "warn",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-one-expression-per-line": "off",
+        "react/prop-types": "off"
+      }
+    },
+
+    // Typescript
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "plugins": ["@typescript-eslint", "import"],
+      "parser": "@typescript-eslint/parser",
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:import/typescript"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "warn"
+      }
+    }
+  ]
 }
