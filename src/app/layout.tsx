@@ -22,7 +22,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${MontserratFont.className} ${MontserratFont.variable} antialiased`}>
+        <body
+          className={`${MontserratFont.className} ${MontserratFont.variable} !scroll-smooth !antialiased`}
+        >
           {children}
         </body>
       </html>
