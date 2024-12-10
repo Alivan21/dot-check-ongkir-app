@@ -1,6 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["node_modules/*", ".next/*", ".out/*", "!.prettierrc", "!.eslintrc"],
+  "ignorePatterns": [
+    "node_modules/*",
+    ".next/*",
+    ".out/*",
+    "!.prettierrc",
+    "!.eslintrc",
+    "src/components/ui/*"
+  ],
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
