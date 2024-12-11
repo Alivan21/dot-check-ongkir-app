@@ -1,7 +1,7 @@
 export default function Dashboard() {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <main className="min-h-screen bg-background">
+      <h1>Test</h1>
+    </main>
   );
 }

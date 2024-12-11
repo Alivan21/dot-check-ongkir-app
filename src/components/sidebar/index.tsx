@@ -23,8 +23,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={NavMenu} />
       </SidebarContent>
-      <SidebarFooter>
-        <UserButton />
+      <SidebarFooter className="p-4">
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: "size-8",
+              userButtonBox: {
+                flexDirection: "row-reverse",
+                fontSize: "text-base",
+                fontWeight: "font-medium",
+              },
+              userButtonOuterIdentifier: "text-base font-medium",
+            },
+          }}
+          showName
+        />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
