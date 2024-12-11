@@ -51,7 +51,12 @@ const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className={cn("justify-between", buttonClassName)}
+            disabled={disabled}
+            className={cn(
+              "justify-between",
+              buttonClassName,
+              disabled && "cursor-not-allowed opacity-50"
+            )}
           >
             {value ? options.find(option => option.value === value)?.label : placeholder}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
