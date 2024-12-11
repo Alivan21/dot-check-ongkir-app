@@ -1,8 +1,5 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -10,71 +7,93 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
+import * as React from "react";
 
-export type ComboboxOption = {
+export interface ComboboxOption {
   value: string;
   label: string;
-};
+}
 
 interface ComboboxProps {
   options: ComboboxOption[];
-  value: string;
-  onChangeAction: (value: string) => void;
+  disabled?: boolean;
   placeholder?: string;
-  emptyMessage?: string;
+  emptyText?: string;
+  buttonClassName?: string;
+  onChangeAction?: (value: string) => void;
 }
 
-export function Combobox({
-  options,
-  value,
-  onChangeAction,
-  placeholder = "Select an option...",
-  emptyMessage = "No results found.",
-}: ComboboxProps) {
-  const [open, setOpen] = React.useState(false);
+const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
+  (
+    {
+      options,
+      disabled = false,
+      placeholder = "Select an option...",
+      emptyText = "No option found.",
+      buttonClassName = "w-full",
+      onChangeAction,
+    },
+    ref
+  ) => {
+    const [open, setOpen] = React.useState(false);
+    const [value, setValue] = React.useState("");
 
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[200px] justify-between"
-        >
-          {value ? options.find(option => option.value === value)?.label : placeholder}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder={placeholder} />
-          <CommandEmpty>{emptyMessage}</CommandEmpty>
-          <CommandGroup>
-            {options.map(option => (
-              <CommandItem
-                key={option.value}
-                value={option.value}
-                onSelect={currentValue => {
-                  onChangeAction(currentValue === value ? "" : currentValue);
-                  setOpen(false);
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    value === option.value ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                {option.label}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  );
-}
+    return (
+      <Popover open={open && !disabled} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            ref={ref}
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className={cn("justify-between", buttonClassName)}
+          >
+            {value ? options.find(option => option.value === value)?.label : placeholder}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className={cn("p-0", buttonClassName)}>
+          <Command>
+            <CommandInput placeholder={`Cari ${placeholder.toLowerCase()}...`} />
+            <CommandList>
+              <CommandEmpty>{emptyText}</CommandEmpty>
+              <CommandGroup>
+                {options
+                  ? options.map(option => (
+                      <CommandItem
+                        key={option.value}
+                        value={option.value}
+                        onSelect={currentValue => {
+                          const newValue = currentValue === value ? "" : currentValue;
+                          setValue(newValue);
+                          setOpen(false);
+                          onChangeAction?.(newValue);
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            value === option.value ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                        {option.label}
+                      </CommandItem>
+                    ))
+                  : null}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+    );
+  }
+);
+
+Combobox.displayName = "Combobox";
+
+export default Combobox;

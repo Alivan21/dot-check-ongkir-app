@@ -11,6 +11,7 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
+    "plugin:@tanstack/query/recommended",
     "plugin:tailwindcss/recommended",
     "prettier"
   ],
@@ -32,17 +33,15 @@
         "plugin:jsx-a11y/recommended"
       ],
       "rules": {
-        "react/jsx-no-leaked-render": ["error", { "validStrategies": ["coerce"] }],
+        "react/jsx-no-leaked-render": ["error", { "validStrategies": ["coerce", "ternary"] }],
         "react/jsx-max-depth": ["error", { "max": 8 }],
         "react/jsx-no-useless-fragment": "warn",
         "react/jsx-curly-brace-presence": "warn",
-        "react/no-typos": "warn",
         "react/display-name": "warn",
         "react/self-closing-comp": "warn",
         "react/jsx-sort-props": "warn",
         "react/react-in-jsx-scope": "off",
-        "react/jsx-one-expression-per-line": "off",
-        "react/prop-types": "off"
+        "react/jsx-one-expression-per-line": "off"
       }
     },
 

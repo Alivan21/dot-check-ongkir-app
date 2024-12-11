@@ -1,3 +1,4 @@
+import TanstackProvider from "@/components/providers/tanstack-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
@@ -25,7 +26,7 @@ export default function RootLayout({
         <body
           className={`${MontserratFont.className} ${MontserratFont.variable} !scroll-smooth !antialiased`}
         >
-          {children}
+          <TanstackProvider>{children}</TanstackProvider>
         </body>
       </html>
     </ClerkProvider>
